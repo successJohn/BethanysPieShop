@@ -1,20 +1,23 @@
-﻿@model IEnumerable<BethanysPieShop.Models.Pie>
+﻿@*@model IEnumerable<BethanysPieShop.Models.Pie>*@
+@model PieListViewModel
 
 
-<html>
-<head>
-    <title>Bethany's Pie Shop</title>
-</head>
-<body>
+<h1>@Model.CurrentCategory</h1>
 
-   <h1> @ViewBag.CurrentCategory</h1>
-  @foreach(var pie in Model)
-            {
-                <div>
-                    <h2>@pie.Name</h2>
-                    <h2>@pie.Price</h2>
-                   
+<div class="row mx-auto">
+    @foreach (var pie in Model.Pies)
+    {
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src="@pie.ImageThumbnailUrl" alt="">
+                <div class="caption">
+                    <h3 class="pull-right">@pie.Price.ToString("c")</h3>
+                    <h3>
+                        <a asp-controller="Pie" asp-action="Details"asp-route-id="@pie.PieId" >@pie.Name</a>
+                    </h3>
+                    <p>@pie.ShortDescription</p>
                 </div>
-            }
-</body>
-</html>
+            </div>
+        </div>
+    }
+</div>
